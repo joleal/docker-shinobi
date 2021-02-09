@@ -41,6 +41,11 @@ services:
       SHINOBI_SUPER_USER_EMAIL: "${SHINOBI_SUPER_USER_EMAIL}"
       SHINOBI_SUPER_USER_PASSWORD: "${SHINOBI_SUPER_USER_PASSWORD}"
       SHINOBI_SUPER_USER_TOKEN: "${SHINOBI_SUPER_USER_TOKEN}"
+    labels:
+      "traefik.enable": "true"
+      "traefik.docker.network": "bridge"
+      "traefik.http.routers.shinobi.rule" : "Host(`shinobi.{{ base_domain }}`)"
+      "traefik.http.routers.shinobi.middlewares": "private@file"
     depends_on:
       - database
 
