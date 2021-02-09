@@ -71,7 +71,7 @@ services:
       MYSQL_PASSWORD: "${MYSQL_USER_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_DATABASE:-ccio}"
       
-  networks:
+networks:
   default:
     external:
       name: homelab-media
