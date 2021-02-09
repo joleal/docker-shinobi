@@ -44,7 +44,7 @@ services:
     labels:
       "traefik.enable": "true"
       "traefik.docker.network": "bridge"
-      "traefik.http.routers.shinobi.rule" : "Host(`shinobi.{{ base_domain }}`)"
+      "traefik.http.routers.shinobi.rule" : "Host(`shinobi.pi.lealon.com`)"
       "traefik.http.routers.shinobi.middlewares": "private@file"
     depends_on:
       - database
