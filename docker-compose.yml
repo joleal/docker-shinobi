@@ -32,9 +32,9 @@ services:
     ports:
       - "${SHINOBI_HOST_PORT:-8080}:${SHINOBI_CONTAINER_PORT:-8080}"
     networks:
-      - name: homelab-media
+      - name: "homelab-media"
         aliases:
-          - sonarr
+          - "sonarr"
     environment:
       MYSQL_HOST: database
       MYSQL_PORT: "3306"
