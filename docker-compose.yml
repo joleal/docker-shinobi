@@ -33,6 +33,7 @@ services:
       - "${SHINOBI_HOST_PORT:-8080}:${SHINOBI_CONTAINER_PORT:-8080}"
     networks:
       - homelab-media
+      - internal
     environment:
       MYSQL_HOST: database
       MYSQL_PORT: "3306"
