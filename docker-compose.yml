@@ -31,6 +31,8 @@ services:
         read_only: true
     ports:
       - "${SHINOBI_HOST_PORT:-8080}:${SHINOBI_CONTAINER_PORT:-8080}"
+    networks:
+      - homelab-media
     environment:
       MYSQL_HOST: database
       MYSQL_PORT: "3306"
@@ -43,7 +45,7 @@ services:
       SHINOBI_SUPER_USER_TOKEN: "${SHINOBI_SUPER_USER_TOKEN}"
     labels:
       "traefik.enable": "true"
-      "traefik.docker.network": "bridge"
+      "traefik.docker.network": "homelab-media"
       "traefik.http.routers.shinobi.rule" : "Host(`shinobi.pi.lealon.com`)"
       "traefik.http.routers.shinobi.middlewares": "private@file"
     depends_on:
@@ -65,6 +67,10 @@ services:
         target: /var/lib/mysql
     expose:
       - "3306"
+    networks:
+      - internal
+    labels:
+      "traefik.enable": "false"
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
       MYSQL_USER: "${MYSQL_USER_NAME:-shinobi}"
@@ -72,6 +78,7 @@ services:
       MYSQL_DATABASE: "${MYSQL_DATABASE:-ccio}"
       
 networks:
-  default:
-    external:
-      name: homelab-media
+  homelab-media:
+    external: true
+  internal:
+    external: false
